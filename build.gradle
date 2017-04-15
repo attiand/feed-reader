@@ -4,31 +4,30 @@ plugins {
 	id 'eclipse'
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '3.5'
-}
+task wrapper(type: Wrapper) { gradleVersion = '3.5' }
 
 repositories {
 	mavenLocal()
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
-    compile module('org.codehaus.groovy:groovy-all:2.4.10') {
+	compile module('org.codehaus.groovy:groovy-all:2.4.10') {
 		dependency('commons-cli:commons-cli:1.4')
 		dependency('com.github.attiand:feed-archive-stream:+')
+		dependency('net.sf.saxon:Saxon-HE:9.7.0-15')
 	}
 }
 
 task runScript(type: JavaExec) {
 	description 'Run Groovy script'
- 
+
 	main = 'com.github.attiand.feedreader.main'
 	classpath = sourceSets.main.runtimeClasspath
- 
+
 	if(project.hasProperty('args')){
-        args project.args.split(/\s+/)
+		args project.args.split(/\s+/)
 	}
 }
- 
+
 defaultTasks 'runScript'

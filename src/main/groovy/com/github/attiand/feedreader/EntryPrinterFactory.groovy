@@ -2,9 +2,9 @@ package com.github.attiand.feedreader
 
 import com.github.attiand.feedreader.printers.StandardPrinter
 import com.github.attiand.feedreader.printers.XmlPrettyPrinter
-import com.github.attiand.feedreader.printers.EntryPrinter
+import com.github.attiand.feedreader.printers.EntrySummaryPrinter
 
-class PrinterFactory {
+class EntryPrinterFactory {
 
 	enum Type{
 		XML, ENTRY
@@ -14,7 +14,7 @@ class PrinterFactory {
 		new StandardPrinter()
 	}
 
-	static Printer create(String type) {
+	static EntryPrinter create(String type) {
 		try {
 			create(type.toUpperCase() as Type)
 		}
@@ -23,12 +23,12 @@ class PrinterFactory {
 		}
 	}
 
-	static Printer create(Type type) {
+	static EntryPrinter create(Type type) {
 		if(type == Type.XML) {
 			new XmlPrettyPrinter()
 		}
 		else if(type == Type.ENTRY) {
-			new EntryPrinter()
+			new EntrySummaryPrinter()
 		}
 		else {
 			standard()

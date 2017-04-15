@@ -8,9 +8,9 @@ import java.util.stream.Collectors
 
 import groovy.lang.Closure
 import com.github.attiand.archive.Entry
-import com.github.attiand.feedreader.Printer;
+import com.github.attiand.feedreader.EntryPrinter;
 
-class EntryPrinter implements Printer {
+class EntrySummaryPrinter implements EntryPrinter {
 
 	@Override
 	public void print(Entry entry, PrintStream out) {

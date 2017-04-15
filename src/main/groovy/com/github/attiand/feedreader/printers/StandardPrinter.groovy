@@ -4,14 +4,27 @@ import java.io.PrintStream
 
 import groovy.lang.Closure
 import com.github.attiand.archive.Entry
-import com.github.attiand.feedreader.Printer;
+import com.github.attiand.feedreader.EntryPrinter
 
-class StandardPrinter implements Printer {
+class StandardPrinter implements EntryPrinter {
 
 	@Override
 	public void print(Entry entry, PrintStream out) {
+		printIfNotNull(out, entry.getTitle())
+		printIfNotNull(out, entry.getUri())
+
+		entry.getCategories().stream().each{ category ->
+			out.println(category.getName())
+		}
+
 		entry.getContents().each { content ->
-			out.println(entry)
+			out.println(content.getValue())
+		}
+	}
+
+	private void printIfNotNull(def out, def content) {
+		if(content) {
+			out.println(content)
 		}
 	}
 }
