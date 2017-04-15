@@ -28,9 +28,6 @@ class XPathFilter {
 		XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_SAXON);
 		XPath xPath = xPathFactory.newXPath();
 		this.expression = xPath.compile(expression);
-		
-		
-		println this.expression
 	}
 
 	public boolean elements(Document document) {

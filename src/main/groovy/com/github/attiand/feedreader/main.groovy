@@ -43,11 +43,11 @@ try {
 		}
 	}
 	else {
-		entries.filter(filter).forEach{ e ->
+		entries.filter(filter).forEach { e ->
 			printer.print(e, out)
 		}
 	}
 }
-catch (CommandLineException e) {
+catch (CommandLineException | XmlParseException e) {
 	System.err << e.getMessage()
 }

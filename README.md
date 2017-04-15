@@ -27,3 +27,14 @@ Assume feed content is XML and pretty print.
 feedreader --format XML http://192.168.1.3:8090/sim/api/feed/1
 ```
 
+Search feed entry content.
+
+```bash
+feedreader --xpath "//*:link/*:rel='order'" http://192.168.1.3:8090/sim/api/feed/1
+```
+
+Search for the first feed entry that matches the expression. 
+
+```bash
+feedreader --match --xpath "//*:id='4555e3c7-8642-4b10-95b5-3433eb817411'" http://192.168.1.3:8090/sim/api/feed/1
+```

@@ -4,7 +4,11 @@ plugins {
 	id 'eclipse'
 }
 
-task wrapper(type: Wrapper) { gradleVersion = '3.5' }
+task wrapper(type: Wrapper) { 
+	gradleVersion = '3.5'
+}
+
+defaultTasks 'runScript'
 
 repositories {
 	mavenLocal()
@@ -16,6 +20,7 @@ dependencies {
 		dependency('commons-cli:commons-cli:1.4')
 		dependency('com.github.attiand:feed-archive-stream:+')
 		dependency('net.sf.saxon:Saxon-HE:9.7.0-15')
+		dependency('org.slf4j:slf4j-simple:1.7.25')
 	}
 }
 
@@ -29,5 +34,3 @@ task runScript(type: JavaExec) {
 		args project.args.split(/\s+/)
 	}
 }
-
-defaultTasks 'runScript'
