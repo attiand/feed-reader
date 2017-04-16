@@ -1,7 +1,7 @@
 package com.github.attiand.feedreader
 
 import java.util.function.Predicate
-import com.github.attiand.feedreader.filters.XPathFilter
+import com.github.attiand.feedreader.filters.XPathEvaluator
 
 import com.github.attiand.feedreader.EntryPrinterFactory.Type;
 
@@ -26,10 +26,10 @@ class EntryFilterFactory {
 
 	static Predicate create(Type type, String arg) {
 		if(type == Type.XPATH) {
-			XPathFilter filter = new XPathFilter(arg)
+			XPathEvaluator filter = new XPathEvaluator(arg)
 			return { 
 				entry -> entry.dom().filter{
-					dom-> filter.elements(dom)
+					dom-> filter.match(dom)
 				}.findFirst().isPresent()
 			} as Predicate
 		}

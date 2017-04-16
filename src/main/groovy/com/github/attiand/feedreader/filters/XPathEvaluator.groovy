@@ -16,26 +16,32 @@ import org.w3c.dom.NodeList
 
 import net.sf.saxon.lib.NamespaceConstant
 
-import com.github.attiand.feedreader.XmlParseException
+import com.github.attiand.feedreader.XPathEvaluationException
 
-class XPathFilter {
+class XPathEvaluator {
 
 	final XPathExpression expression
 
-	public XPathFilter(String expression) {
+	public XPathEvaluator(String expression) {
 		System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_SAXON,
 				"net.sf.saxon.xpath.XPathFactoryImpl");
-		XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_SAXON);
-		XPath xPath = xPathFactory.newXPath();
-		this.expression = xPath.compile(expression);
+		XPathFactory factory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_SAXON);
+		this.expression = factory.newXPath().compile(expression);
 	}
 
-	public boolean elements(Document document) {
+	public boolean match(Document document) {
 		try {
 			return (Boolean) expression.evaluate(document, XPathConstants.BOOLEAN);
-			//eturn IntStream.range(0, res.getLength()).mapToObj{i -> (Element) res.item(i)};
 		} catch (XPathFactoryConfigurationException | XPathExpressionException e) {
-			throw new XmlParseException("Can't evaluate Xpath", e);
+			throw new XPathEvaluationException("Can't evaluate XPath expression", e);
+		}
+	}
+	
+	public String value(Document document) {
+		try {
+			return (String) expression.evaluate(document, XPathConstants.STRING);
+		} catch (XPathFactoryConfigurationException | XPathExpressionException e) {
+			throw new XPathEvaluationException("Can't evaluate XPath expression", e);
 		}
 	}
 }

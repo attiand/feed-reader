@@ -1,6 +1,6 @@
 # feed-reader
 
-Filter and formats atom feed archives
+Query and formats atom feed archives
 
 ## Usage
 
@@ -10,7 +10,7 @@ usage: feedreader [OPTIONS] URL
                            the beginning
  -D <property=value>       sets a system property value
  -f,--format <formatter>   print using specified formatter, available are:
-                           XML, ENTRY
+                           XML, ENTRY, XPATH:expr
  -h,--help                 usage information
  -k,--unsecure             try insecure SSL connection
  -m,--match                print only the first matching entry
@@ -49,4 +49,9 @@ Search for the first feed entry that matches the expression.
 ```bash
 feedreader --match --xpath "//*:id='4555e3c7-8642-4b10-95b5-3433eb817411'" \
            http://192.168.1.3:8090/sim/api/feed/1
+```
+Print value from XPath expression
+
+```bash
+feedreader --format 'XPATH://*:id' http://192.168.1.3:8090/sim/api/feed/1
 ```

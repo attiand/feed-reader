@@ -8,7 +8,7 @@ def cli = new CliBuilder(usage: 'feedreader [OPTIONS] URL')
 cli.with {
 	h  longOpt:'help', 'usage information'
 	b  longOpt:'backward', 'read the last feed entry from URL and move to the beginning'
-	f  longOpt:'format', args:2, argName:'formatter', 'print using specified formatter, available are: XML, ENTRY'
+	f  longOpt:'format', args:2, argName:'formatter', 'print using specified formatter, available are: XML, ENTRY, XPATH:expr'
 	k  longOpt:'unsecure', 'try insecure SSL connection'
 	x  longOpt:'xpath', args:2, argName:'expression', 'print only entries with content that match specified xpath 2.0 expression'
 	m  longOpt:'match', 'print only the first matching entry'
@@ -18,7 +18,7 @@ cli.with {
 
 def opt = cli.parse(args)
 
-if(opt.arguments().size() != 1 || opt.h) {
+if(opt.arguments().size() != 1 || !opt.arguments().head() || opt.h) {
 	cli.usage()
 	return
 }
