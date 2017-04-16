@@ -4,7 +4,7 @@ import java.io.PrintStream
 
 import com.github.attiand.archive.Entry
 import com.github.attiand.feedreader.EntryPrinter
-import com.github.attiand.feedreader.filters.XPathEvaluator
+import com.github.attiand.feedreader.internal.XPathEvaluator
 
 class XPathPrinter implements EntryPrinter {
 

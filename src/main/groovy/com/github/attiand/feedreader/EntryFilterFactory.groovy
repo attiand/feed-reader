@@ -1,7 +1,7 @@
 package com.github.attiand.feedreader
 
 import java.util.function.Predicate
-import com.github.attiand.feedreader.filters.XPathEvaluator
+import com.github.attiand.feedreader.internal.XPathEvaluator
 
 import com.github.attiand.feedreader.EntryPrinterFactory.Type;
 

@@ -14,14 +14,21 @@ class EntrySummaryPrinter implements EntryPrinter {
 
 	@Override
 	public void print(Entry entry, PrintStream out) {
-		LocalDateTime local = LocalDateTime.ofInstant(entry.getUpdatedDate().toInstant(), ZoneId.systemDefault());
-		out.print(local.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-		out.print(';')
+		entry.getUpdatedDate().ifPresent { d ->
+			LocalDateTime local = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+			out.print(local.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+			out.print(';')
+		}
 
-		out.print(entry.getUri())
-		out.print(';')
+		entry.getUri().ifPresent { u ->
+			out.print(u)
+			out.print(';')
+		}
 
-		out.print(entry.getCategories().stream().map{c -> c.getName()}.collect(Collectors.joining(",")));
+		if(! entry.getCategories().isEmpty()) {
+			out.print(entry.getCategories().stream().map{c -> c.getName()}.collect(Collectors.joining(",")));
+		}
+
 		out.println()
 	}
 }

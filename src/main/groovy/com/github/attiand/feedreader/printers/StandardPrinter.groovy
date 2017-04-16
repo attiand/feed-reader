@@ -10,8 +10,8 @@ class StandardPrinter implements EntryPrinter {
 
 	@Override
 	public void print(Entry entry, PrintStream out) {
-		printIfNotNull(out, entry.getTitle())
-		printIfNotNull(out, entry.getUri())
+		entry.getTitle().ifPresent { t -> out.println(t)}
+		entry.getUri().ifPresent { u -> out.println(u)}
 
 		entry.getCategories().stream().each{ category ->
 			out.println(category.getName())
@@ -19,12 +19,6 @@ class StandardPrinter implements EntryPrinter {
 
 		entry.getContents().each { content ->
 			out.println(content.getValue())
-		}
-	}
-
-	private void printIfNotNull(def out, def content) {
-		if(content) {
-			out.println(content)
 		}
 	}
 }

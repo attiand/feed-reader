@@ -1,4 +1,4 @@
-package com.github.attiand.feedreader.filters
+package com.github.attiand.feedreader.internal
 
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
