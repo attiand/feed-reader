@@ -1,0 +1,17 @@
+_feedreader(){
+   local cur prev opts
+   COMPREPLY=()
+   cur="${COMP_WORDS[COMP_CWORD]}"
+   prev="${COMP_WORDS[COMP_CWORD-1]}"
+   opts="-h --help -b --backward -f --format -k --unsecure -x --xpath -m --match -o --output -D"
+   case "${prev}" in 
+      -o|--output)
+         COMPREPLY=( $(compgen -f ${cur}) )
+         return 0
+         ;;
+
+   esac
+
+   COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+complete -F _feedreader feedreader
