@@ -1,6 +1,6 @@
 package com.github.attiand.feedreader
 
-import com.github.attiand.archive.*
+import com.github.attiand.feedarchive.*
 import com.github.attiand.feedreader.EntryFilterFactory.Type
 
 def cli = new CliBuilder(usage: 'feedreader [OPTIONS] URL')
@@ -30,8 +30,8 @@ opt.Ds.each {
 }
 
 try {
-	def factory = opt.k ? FeedSourceFactory.insecure() : FeedSourceFactory.secure()
-	def feed = FeedSource.fromUri(url, factory)
+	def factory = opt.k ? FeedReader.unsecure() : FeedReader.secure()
+	def feed = FeedReader.fromUri(url, factory)
 	def entries = opt.b ? feed.reverseStream() : feed.stream()
 	def filter = opt.x ? EntryFilterFactory.create(Type.XPATH, opt.x) : EntryFilterFactory.nop()
 	def out = opt.o ? new PrintStream(opt.o) : System.out
@@ -48,6 +48,6 @@ try {
 		}
 	}
 }
-catch (CommandLineException | XmlParseException e) {
+catch (CommandLineException | XPathEvaluationException e) {
 	System.err << e.getMessage()
 }

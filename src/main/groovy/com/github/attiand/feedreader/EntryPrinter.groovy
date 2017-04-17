@@ -1,6 +1,6 @@
 package com.github.attiand.feedreader
 
-import com.github.attiand.archive.Entry
+import com.github.attiand.feedarchive.Entry
 
 interface EntryPrinter {
 

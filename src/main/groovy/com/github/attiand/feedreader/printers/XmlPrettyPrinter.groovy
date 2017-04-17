@@ -2,7 +2,7 @@ package com.github.attiand.feedreader.printers
 
 import java.io.PrintStream
 
-import com.github.attiand.archive.Entry
+import com.github.attiand.feedarchive.Entry
 import com.github.attiand.feedreader.EntryPrinter
 import groovy.xml.*
 

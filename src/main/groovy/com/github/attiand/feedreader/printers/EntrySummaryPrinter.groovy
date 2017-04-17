@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
 import groovy.lang.Closure
-import com.github.attiand.archive.Entry
+import com.github.attiand.feedarchive.Entry
 import com.github.attiand.feedreader.EntryPrinter;
 
 class EntrySummaryPrinter implements EntryPrinter {
