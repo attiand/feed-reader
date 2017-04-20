@@ -25,8 +25,10 @@ if(opt.arguments().size() != 1 || !opt.arguments().head() || opt.h) {
 
 def url = opt.arguments().head()
 
-opt.Ds.each {
-	System.properties[it] = it
+if(opt.D) {
+	opt.Ds.toSpreadMap().each { k, v ->
+		System.setProperty(k, v)
+	}
 }
 
 try {
