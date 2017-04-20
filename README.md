@@ -55,3 +55,9 @@ Print value from XPath expression.
 ```bash
 feedreader --format 'XPATH://*:id' http://192.168.1.3:8080/feed/1
 ```
+
+Print several values separated with a ':' character.
+
+```bash
+feedreader --format 'XPATH:string-join((//*:id,//*:href),\":\")' http://192.168.1.3:8080/feed/1
+```
